@@ -4,11 +4,12 @@
     <button
         @click="$emit('toggle-edit-mode', settingsName)"
         type="button"
-        :class="['profile-actions-title__btn', { 'profile-actions-title__btn--edit': isEditingMode }]">
+        :disabled="disabledEditButton"
+        :class="['profile-actions-title__btn', { 'profile-actions-title__btn--edit': isEditMode }]">
       <svg-icon
           :icon="require('@/assets/images/icons/profile/icon-edit.svg')"
-          :width="24"
-          :height="24"
+          :width="18"
+          :height="18"
       />
     </button>
   </div>
@@ -20,8 +21,9 @@ export default {
   emits: ['toggle-edit-mode'],
   props: {
     title: {type: String},
-    isEditingMode: {type: Boolean},
-    settingsName: {type: String}
+    isEditMode: {type: Boolean},
+    settingsName: {type: String},
+    disabledEditButton: {type: Boolean}
   },
 
 }
@@ -30,7 +32,7 @@ export default {
 <style lang="scss">
 .profile-actions-title {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   &__item {
     font-family: "Rubik";
     font-size: 18px;
@@ -38,17 +40,20 @@ export default {
     color: #212121;
   }
   &__btn {
+    cursor: pointer;
     background-color: transparent;
     border: none;
     padding: 0;
     margin: 0px 0px 0px 16px;
     outline: none;
+    line-height: 1;
     svg {
       fill: #333;
+      transition: all 0.3s ease;
     }
     &--edit {
       svg {
-        fill: #20C561
+        fill: #20C561;
       }
     }
   }

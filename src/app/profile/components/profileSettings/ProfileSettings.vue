@@ -1,5 +1,5 @@
 <template>
-  <form action="#" class="profile-settings">
+  <div class="profile-settings">
     <div class="profile-settings__info">
       <div class="profile-settings-info">
         <div class="profile-settings-info__avatar">
@@ -12,27 +12,43 @@
       <div class="profile-settings-actions">
         <div class="profile-settings-actions__row">
           <div class="profile-settings-actions__column">
-            <profile-actions-title
-                :isEditingMode="editAccountSettings"
+            <div class="profile-settings-actions__title">
+              <profile-actions-title
+                :isEditMode="editAccountSettings"
                 @toggle-edit-mode="toggleEditMode"
                 :title="'Account settings'"
                 :settingsName="'account-settings'"
+                :disabledEditButton="disabledEditButton"
+              /> 
+            </div>
+
+            <profile-account-settings 
+              :isEditMode="editAccountSettings"
+              :userData="userData" 
             />
-            <profile-account-settings :userData="userData"/>
           </div>
           <div class="profile-settings-actions__column">
-            <profile-actions-title
-                :isEditingMode="editSecurity"
+            <div class="profile-settings-actions__title">
+              <profile-actions-title
+                :isEditMode="editSecurity"
                 @toggle-edit-mode="toggleEditMode"
                 :title="'Security'"
                 :settingsName="'security'"
+                :disabledEditButton="disabledEditButton"
+              />
+            </div>
+            <profile-security 
+              :isEditMode="editSecurity" 
+              :userData="userData"
+              @deactivate-edit-mode="toggleEditMode"
+              :settingsName="'security'"
             />
-            <profile-security :userData="userData" />
+            
           </div>
         </div>
       </div>
     </div>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -52,21 +68,25 @@ export default {
         password: "passwordforcorella",
       },
       editAccountSettings: false,
-      editSecurity: false
+      editSecurity: false,
+      disabledEditButton: false
     }
   },
   methods: {
     toggleEditMode(settingsName) {
-
+      this.disabledEditButton = true
+      
       switch (settingsName) {
         case 'account-settings':
           this.editAccountSettings = !this.editAccountSettings
-          return
+          break
         case 'security':
           this.editSecurity = !this.editSecurity
-          return
+          break
       }
-
+      setTimeout(() => {
+        this.disabledEditButton = false
+      }, 300)
     }
   },
   components: {
@@ -111,6 +131,9 @@ export default {
 
   &__input {
     margin: 0px 0px 24px 0px;
+  }
+  &__title {
+    margin: 0px 0px 18px 0px;
   }
 }
 </style>

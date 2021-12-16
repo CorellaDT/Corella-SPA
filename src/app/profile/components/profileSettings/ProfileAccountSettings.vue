@@ -1,8 +1,8 @@
 <template>
-  <div class="profile-account-settings">
+  <form class="profile-account-settings">
     <div class="profile-account-settings__input">
       <base-input
-          @update:modalValue="$emit('update:modalValue')"
+          :disabled="!isEditMode"
           :label="'Username'"
           :model-value="userData.name"
           :placeholder="'Your name'"
@@ -10,13 +10,13 @@
     </div>
     <div class="profile-account-settings__input">
       <base-input
-          @update:modalValue="$emit('update:modalValue')"
+          :disabled="!isEditMode"
           :label="'E-mail'"
           :model-value="userData.email"
           :placeholder="'Your email'"
       />
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
@@ -25,7 +25,9 @@ export default {
   name: "profile-account-settings",
   components: {BaseInput},
   props: {
-    userData: { type: Object }
+    userData: { type: Object },
+    isEditMode: { type: Boolean },
+    settingsName: { type: String }
   }
 }
 </script>
