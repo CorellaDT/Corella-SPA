@@ -4,7 +4,7 @@
     class="change-password-profile"
   >
     <div class="change-password-profile__input">
-      <base-input
+      <profile-password-input
           disabled
           :type="'password'"
           :label="'Current password'"
@@ -13,7 +13,7 @@
       />
     </div>
     <div v-show="isEditMode" class="change-password-profile__input">
-      <base-input
+      <profile-password-input
           :disabled="!isEditMode"
           :type="'password'"
           :label="'New password'"
@@ -23,7 +23,7 @@
       />
     </div>
     <div v-show="isEditMode" class="change-password-profile__input">
-      <base-input
+      <profile-password-input
           :disabled="!isEditMode"
           :type="'password'"
           :label="'Confirm password'"
@@ -32,18 +32,20 @@
           @update:modelValue="updateConfirmedPassword"
       />
     </div>
-    <div v-show="isEditMode" class="change-password-profile__button">
-      <base-button :minWidth="306" :text="'Save'"></base-button>
+    <div v-show="isEditMode" class="change-password-profile__btn">
+      <base-button :disabled="!wasChanged" :width="306" :text="'Save'"></base-button>
     </div>
   </form>
 </template>
 
 <script>
-import BaseInput from "@/app/common/components/BaseInput";
-import BaseButton from "@/app/common/components/BaseButton";
+import BaseButton from "@/app/common/components/BaseButton"
+import ProfilePasswordInput from "@/app/profile/components/profileSettings/components/ProfilePasswordInput"
+import {notificationsHelper} from "@/helpers/notifications.helper"
+
 export default {
   name: "profile-security",
-  components: {BaseInput, BaseButton},
+  components: {ProfilePasswordInput, BaseButton},
   props: {
     userData: { type: Object },
     isEditMode: { type: Boolean },
@@ -53,26 +55,37 @@ export default {
   data() {
     return {
       newPassword: "",
-      confirmedPassword: ""
+      confirmedPassword: "",
+      wasChanged: false
     }
   },
   methods: {
     submitForm() {
-      if (!this.newPassword) return;
-      if (this.newPassword !== this.confirmedPassword) return;
+      if (!this.newPassword && !this.confirmedPassword) {
+        notificationsHelper.error({ message: 'New password is not defined' })
+        return
+      }
+      if (this.newPassword !== this.confirmedPassword) {
+        notificationsHelper.error({ message: 'Confirmed password is not equal to new password' })
+        return
+      }
 
-      console.log(`Now your password is ${this.newPassword}`)
+      notificationsHelper.success({ message: 'Your password was successfully updated' })
       
       this.newPassword = ""
       this.confirmedPassword = ""
-      
+      this.wasChanged = false
       this.$emit('deactivate-edit-mode', this.settingsName)
     },
     updateConfirmedPassword(value) {
-      this.confirmedPassword = value;
+      if (!this.wasChanged) this.wasChanged = true
+      this.confirmedPassword = value
+
     },
     updateNewPassword(value) {
-      this.newPassword = value;
+      if (!this.wasChanged) this.wasChanged = true
+      this.newPassword = value
+
     }
   },
   computed: {
@@ -91,7 +104,7 @@ export default {
       margin: 0;
     }
   }
-  &__button {
+  &__btn {
     margin: 44px 0px 0px 0px;
   }
 }

@@ -1,7 +1,8 @@
 <template>
 	<button 
-		:style="{ minWidth: minWidth + 'px' }" 
+		:style="{ minWidth: width + 'px' }"
 		class="base-button"
+    :disabled="disabled"
 	>
 		<slot name="icon"></slot>
 		<span>{{ text }}</span>
@@ -12,8 +13,9 @@
 	export default {
 		name: "base-button",
 		props: {
-			minWidth: {type: Number},
-			text: {type: String}
+      width: {type: Number},
+			text: {type: String},
+      disabled: {type: Boolean}
 		}
 	}
 </script>
@@ -31,5 +33,13 @@
 		border-radius: 4px;
 		color: #fff;
 		cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: #20C561;
+    }
+    &[disabled] {
+      background-color: #F4F3FE;
+      color: #DDDDDD;
+    }
 	}
 </style>

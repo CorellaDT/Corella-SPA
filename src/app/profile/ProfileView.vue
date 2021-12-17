@@ -28,8 +28,10 @@ export default {
   },
   methods: {
     selectTab(tabName, tabIndex) {
-      this.selectedTabName = tabName;
-      this.selectedTabIndex = tabIndex;
+      // const paddingValue = window.innerWidth - document.body.offsetWidth + 'px'
+      // document.body.style.paddingRight = paddingValue
+      this.selectedTabName = tabName
+      this.selectedTabIndex = tabIndex
     }
   },
   components: {

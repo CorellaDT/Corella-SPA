@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: "profile-actions-title",
+  name: "profile-edit-title",
   emits: ['toggle-edit-mode'],
   props: {
     title: {type: String},

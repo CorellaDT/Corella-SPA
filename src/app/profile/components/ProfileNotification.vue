@@ -7,7 +7,3 @@
     name: 'profile-notification'
   }
 </script>
-
-<style lang="scss">
-
-</style>

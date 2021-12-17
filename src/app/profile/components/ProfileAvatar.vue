@@ -40,12 +40,12 @@ export default {
       this.$refs.input.click()
     },
     changeAvatar(e) {
-      const file = e.target.files[0];
+      const file = e.target.files[0]
 
-      this.avatarLink = URL.createObjectURL(file);
-      this.$avatar = file;
+      this.avatarLink = URL.createObjectURL(file)
+      this.$avatar = file
 
-      e.target.value = null;
+      e.target.value = null
     }
   },
 }
@@ -87,9 +87,20 @@ export default {
     min-width: 42px;
     display: flex;
     justify-content: center;
+    box-sizing: border-box;
     align-items: center;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
     svg {
       fill: #fff;
+    }
+    &:hover {
+      border-color: #7280FF;
+      background-color: #fff;
+      svg {
+        fill: #7280FF;
+      }
+
     }
   }
 }
