@@ -45,9 +45,6 @@ export default {
 </script>
 <style lang="scss">
 .view-task-collapse {
-  padding: 24px 0px;
-  border-top: 1px solid #EEEEEE;
-  border-bottom: 1px solid #EEEEEE;
   &__title {
     margin: 0px 0px 16px 0px;
     position: relative;
@@ -100,6 +97,9 @@ export default {
     min-height: 48px;
     height: auto;
     line-height: 18px;
+    @media (max-width: 767.98px) {
+      padding: 15px;
+    }
   }
   &__content {
     padding: 0px 20px 16px 20px;
@@ -108,6 +108,9 @@ export default {
     line-height: 16px;
   }
   &__arrow {
+    svg {
+      margin: 0px 0px 0px 10px;
+    }
 
   }
 }

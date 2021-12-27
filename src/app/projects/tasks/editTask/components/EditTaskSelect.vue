@@ -1,7 +1,13 @@
 <template>
   <div class="edit-task-select">
     <base-title text="Members" />
-    <el-select @remove-tag="updateSelectedMembers" @change="updateSelectedMembers" v-model="selectedMembers" multiple placeholder="Select members">
+    <el-select
+        @remove-tag="updateSelectedMembers"
+        @change="updateSelectedMembers"
+        v-model="selectedMembers"
+        multiple
+        placeholder="Select members"
+    >
       <el-option
           v-for="member in dataMembers"
           :key="member.id"
@@ -48,7 +54,7 @@ export default {
         this.dataMembers = members
       })
     }
-  }
+  },
 }
 </script>
 
@@ -71,6 +77,9 @@ export default {
 <style lang="scss">
 .el-select {
   width: 100%;
+  @media (max-width: 1330px) {
+    max-width: 600px;
+  }
   &__popper {
 
   }
@@ -117,6 +126,9 @@ export default {
     font-family: "Rubik";
     font-size: 16px;
     color: #212121;
+    &.hover {
+      background-color: #fff;
+    }
     &:hover {
       background-color: #FAFAFA;
     }

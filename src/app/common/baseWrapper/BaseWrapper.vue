@@ -162,6 +162,9 @@ export default {
     padding: 20px;
     box-sizing: border-box;
     min-height: calc(100vh - 70px);
+    @media (max-width: 767.98px) {
+      padding: 20px 0px;
+    }
   }
 
   &__drag-and-drop {

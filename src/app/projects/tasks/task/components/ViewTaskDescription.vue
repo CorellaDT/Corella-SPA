@@ -25,7 +25,12 @@ export default {
     padding: 16px 20px;
     background-color: #FBFBFB;
     border-radius: 4px;
+    @media (max-width: 767.98px) {
+      padding: 15px;
+    }
   }
-
+  @media (max-width: 1400px) {
+    min-height: 250px;
+  }
 }
 </style>

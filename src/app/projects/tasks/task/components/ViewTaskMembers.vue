@@ -46,8 +46,12 @@ export default {
   align-items: center;
   padding: 8px 12px;
   background-color: #FBFBFB;
+  @media (max-width: 767.98px) {
+    padding: 10px 15px;
+  }
   &__count {
     display: inline-flex;
+    align-self: flex-start;
     height: 40px;
     min-width: 40px;
     padding: 4px;
@@ -59,6 +63,7 @@ export default {
   }
   &__list {
     display: flex;
+    flex-wrap: wrap;
     flex: 1 1 auto;
     padding: 0px 0px 0px 16px;
   }

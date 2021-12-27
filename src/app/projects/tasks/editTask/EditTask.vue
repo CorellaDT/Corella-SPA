@@ -51,7 +51,8 @@ export default {
         this.loading = false
       }, 700)
     }
-  }
+  },
+
 }
 </script>
 
