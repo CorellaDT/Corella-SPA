@@ -16,6 +16,10 @@ const routes = [{
     name: 'base-wrapper',
     component: () => import('@/app/common/baseWrapper/BaseWrapper'),
     children: [{
+        path: '/dashboard',
+        name: 'dashboard',
+        component: () => import('@/app/dashboard/Dashboard')
+    },{
         path: '/',
         name: 'project-list',
         component: () => import('@/app/projects/projectList/ProjectList'),
