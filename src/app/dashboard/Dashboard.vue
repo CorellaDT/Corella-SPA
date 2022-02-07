@@ -1,30 +1,34 @@
 <template>
-  <perfect-scrollbar ref="root" class="dashboard" @scroll="onScroll">
-    <div class="dashboard-table">
-      <div class="dashboard-table__header">
-        <div class="dashboard-table__month" v-for="dateItem in tableDatesMonthAndYear" :key="dateItem">
-          <div class="dashboard-table-header-wrap-month">
-            <div class="dashboard-table__header-month-and-year">
-              {{ new Date(dateItem).toLocaleString('en', {month: 'long'}) }}
-              <br>
-              <span>{{ new Date(dateItem).getFullYear() }}</span>
+  <div>
+    <h1>Dashboard</h1>
+    <p class="sprint-timeline-settings">Sprint Timeline <img src="@/assets/images/icons/dashboard/settings.svg"/></p>
+    <perfect-scrollbar ref="root" class="dashboard" @scroll="onScroll">
+      <div class="dashboard-table">
+        <div class="dashboard-table__header">
+          <div class="dashboard-table__month" v-for="dateItem in tableDatesMonthAndYear" :key="dateItem">
+            <div class="dashboard-table-header-wrap-month">
+              <div class="dashboard-table__header-month-and-year">
+                {{ new Date(dateItem).toLocaleString('en', {month: 'long'}) }}
+                <br>
+                <span>{{ new Date(dateItem).getFullYear() }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dashboard-table__content">
+          <div class="dashboard-table-day" v-for="dateItem in tableDates" :key="dateItem">
+            <div class="dashboard-table-content-wrap-day" v-for="date in dateItem" :key="date">
+              <div class="dashboard-table__content-day">
+                {{ date.day }}
+                <br>
+                <span>{{ date.dayOfTheWeek }}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="dashboard-table__content">
-        <div class="dashboard-table-day" v-for="dateItem in tableDates" :key="dateItem">
-          <div class="dashboard-table-content-wrap-day" v-for="date in dateItem" :key="date">
-            <div class="dashboard-table__content-day">
-              {{ date.day }}
-              <br>
-              <span>{{ date.dayOfTheWeek }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </perfect-scrollbar>
+    </perfect-scrollbar>
+  </div>
 </template>
 
 <script>
@@ -105,6 +109,33 @@ export default {
 </script>
 
 <style scoped lang="scss">
+h1 {
+  font-family: Rubik, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 32px;
+  text-transform: capitalize;
+  color: #3B3B3B;
+  margin-bottom: 24px;
+}
+
+.sprint-timeline-settings {
+  font-family: Rubik, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 32px;
+  text-transform: capitalize;
+  color: #3B3B3B;
+  margin-bottom: 16px;
+  display: flex;
+  & img {
+    cursor: pointer;
+    margin-left: 12px;
+  }
+}
+
 .dashboard {
   overflow-x: auto;
   border-radius: 8px;
