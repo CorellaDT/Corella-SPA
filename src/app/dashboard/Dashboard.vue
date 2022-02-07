@@ -99,7 +99,11 @@ export default {
       console.log(this.tableDates)
     },
     onScroll(event) {
-      // console.log(event);
+      console.log(event);
+      // TODO: не забыть научиться получать % от прокрутки тут
+      // const container = this.$el.querySelector('.ps-container');
+      // container.scrollTop = container.scrollHeight;
+      // console.log(container.scrollTop)
     },
   },
   mounted() {
@@ -107,6 +111,14 @@ export default {
   }
 }
 </script>
+
+
+<style lang="scss">
+.ps > .ps__rail-x,
+.ps > .ps__rail-y {
+  opacity: 0.6;
+}
+</style>
 
 <style scoped lang="scss">
 h1 {
@@ -143,7 +155,6 @@ h1 {
   &-table__header {
     background: #F8F8F8;
     display: flex;
-    //max-height: 60px;
     border-bottom: 1px solid #E7E7E7;
     border-radius: 2px;
   }
@@ -229,6 +240,5 @@ h1 {
     justify-content: space-between;
     padding-right: 40px;
   }
-
 }
 </style>
